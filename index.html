@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社 ARCHI & Co. | 建築資材のプロフェッショナル</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --black: #0f0f0f;
+      --accent: #a88a5d;
+      --accent-light: #c9a87a;
+      --navy: #1e2d3d;
+      --navy-light: #2c3e50;
+      --gray-bg: #f6f5f3;
+      --white: #ffffff;
+      --text: #333;
+      --text-light: #777;
+      --border: #e8e4df;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      line-height: 1.8;
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── ヘッダー ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 72px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      transition: box-shadow 0.3s;
+    }
+    header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--navy);
+      cursor: pointer; text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 2.5rem; }
+    nav a {
+      font-size: 0.78rem; letter-spacing: 0.18em;
+      color: var(--text); text-decoration: none;
+      position: relative; padding-bottom: 3px;
+      text-transform: uppercase;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--navy); transition: 0.3s; }
+
+    /* ── ヒーロー ── */
+    .hero {
+      height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-yt-wrap {
+      position: absolute; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+    .hero-yt-wrap iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 177.78vh; /* 16:9アスペクト比 */
+      height: 56.25vw;
+      min-width: 100%; min-height: 100%;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,15,15,0.6) 0%, rgba(15,15,15,0.35) 50%, rgba(15,15,15,0.7) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; color: white;
+      animation: heroFade 1.6s ease both;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.5em;
+      color: var(--accent-light); margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700; letter-spacing: 0.2em;
+      line-height: 1.25;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      letter-spacing: 0.2em; color: rgba(255,255,255,0.8);
+    }
+    .hero-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--accent-light), transparent);
+      margin: 2rem auto;
+    }
+    @keyframes heroFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── セクション共通 ── */
+    section { padding: 110px 8%; scroll-margin-top: 72px; }
+    .section-header { text-align: center; margin-bottom: 70px; }
+    .section-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem; letter-spacing: 0.5em;
+      color: var(--accent); text-transform: uppercase;
+      display: block; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--navy); letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+    }
+    .section-rule {
+      width: 40px; height: 2px;
+      background: var(--accent);
+      margin: 0 auto;
+    }
+
+    /* ── NEWS ── */
+    #news { background: var(--gray-bg); }
+    .news-list { max-width: 860px; margin: 0 auto; }
+    .news-item {
+      display: flex; gap: 2rem; align-items: flex-start;
+      padding: 1.5rem 1.8rem;
+      background: var(--white);
+      border-left: 3px solid var(--accent);
+      margin-bottom: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .news-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .news-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; color: var(--accent);
+      font-weight: 600; white-space: nowrap; padding-top: 2px;
+    }
+    .news-text { font-size: 0.92rem; line-height: 1.9; }
+
+    /* ── 強み ── */
+    #strength { background: var(--white); }
+    .strength-list { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+    .strength-card {
+      display: grid; grid-template-columns: 260px 1fr;
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .strength-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+    .strength-label {
+      background: var(--navy);
+      color: white; padding: 2.5rem 2rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; text-align: center;
+    }
+    .strength-label i { font-size: 2rem; color: var(--accent-light); }
+    .strength-label h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem; letter-spacing: 0.1em; line-height: 1.7;
+    }
+    .strength-body { padding: 2.5rem 2.5rem; display: flex; align-items: center; }
+    .strength-body p { font-size: 0.92rem; line-height: 2.1; color: #444; }
+
+    /* ── 製品 ── */
+    #products { background: var(--gray-bg); }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; max-width: 1200px; margin: 0 auto;
+    }
+    .product-card {
+      background: var(--white);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+    .product-img {
+      width: 100%; height: 260px; object-fit: cover;
+      border-bottom: 3px solid var(--accent);
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img { transform: scale(1.04); }
+    .product-img-wrap { overflow: hidden; }
+    .product-info { padding: 2rem; }
+    .product-info h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.1rem; letter-spacing: 0.08em;
+      color: var(--navy); margin-bottom: 0.8rem;
+    }
+    .product-info p { font-size: 0.87rem; line-height: 2; color: var(--text-light); }
+
+    /* ── ショールーム ── */
+    #showroom { background: var(--white); }
+    .showroom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .showroom-card {
+      padding: 2rem 2rem 2rem 1.8rem;
+      background: var(--gray-bg);
+      border-left: 4px solid var(--accent);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .showroom-card:hover { background: var(--navy); transform: translateY(-4px); }
+    .showroom-card:hover h3,
+    .showroom-card:hover p { color: rgba(255,255,255,0.9); }
+    .showroom-card h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem; color: var(--navy);
+      margin-bottom: 0.7rem; letter-spacing: 0.08em;
+      transition: color 0.3s;
+    }
+    .showroom-card p { font-size: 0.85rem; color: var(--text-light); line-height: 2; transition: color 0.3s; }
+
+    /* ── 採用 ── */
+    #recruit { background: var(--gray-bg); }
+    .recruit-table {
+      width: 100%; max-width: 1000px; margin: 0 auto;
+      border-collapse: collapse;
+      border-top: 3px solid var(--navy);
+    }
+    .recruit-table tr { border-bottom: 1px solid var(--border); }
+    .recruit-table tr:last-child { border-bottom: none; }
+    .recruit-table th {
+      width: 200px; padding: 1.4rem 1.8rem;
+      background: #f0f2f5;
+      font-size: 0.85rem; letter-spacing: 0.1em;
+      color: var(--navy); font-weight: 700;
+      vertical-align: top; text-align: left;
+    }
+    .recruit-table td {
+      padding: 1.4rem 1.8rem;
+      font-size: 0.9rem; line-height: 2;
+    }
+    .recruit-table td.highlight { color: var(--accent); font-weight: 700; font-size: 1rem; }
+
+    /* ── お問い合わせ ── */
+    #contact { background: var(--navy); }
+    .contact-inner { max-width: 1000px; margin: 0 auto; }
+    #contact .section-en { color: var(--accent-light); }
+    #contact .section-title { color: white; }
+    .contact-lead {
+      text-align: center; color: rgba(255,255,255,0.7);
+      font-size: 0.9rem; margin-bottom: 3.5rem; line-height: 2;
+    }
+    .contact-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; margin-bottom: 3rem;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .contact-card:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+    .contact-card i { font-size: 1.8rem; color: var(--accent-light); margin-bottom: 1.2rem; display: block; }
+    .contact-card h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.95rem; color: white; letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .contact-tel {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; color: var(--accent-light);
+      letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem;
+    }
+    .contact-hours { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+    .contact-btn {
+      display: inline-block;
+      background: var(--accent); color: white;
+      padding: 1rem 2.5rem; text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 0.2em;
+      font-weight: 700; margin-top: 0.5rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .contact-btn:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .contact-address {
+      background: rgba(0,0,0,0.2);
+      padding: 1.5rem 2rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 2;
+    }
+    .contact-address strong { color: rgba(255,255,255,0.85); }
+
+    /* ── フッターナビ ── */
+    .footer-nav {
+      background: var(--black);
+      padding: 70px 8%;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; color: white;
+      letter-spacing: 0.2em; margin-bottom: 2rem;
+      display: block;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.7rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s;
+    }
+    .footer-links a:hover { color: white; border-color: var(--accent); background: rgba(168,138,93,0.1); }
+
+    /* ── コピーライト ── */
+    footer {
+      background: #080808;
+      color: rgba(255,255,255,0.3);
+      padding: 1.8rem; text-align: center;
+      font-size: 0.75rem; letter-spacing: 0.15em;
+    }
+
+    /* ── スクロールアニメ ── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* ── レスポンシブ ── */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      nav.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 72px; left: 0; right: 0;
+        background: white; padding: 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1.5rem; z-index: 999;
+      }
+      .hamburger { display: flex; }
+      .strength-card { grid-template-columns: 1fr; }
+      .strength-label { padding: 1.8rem; flex-direction: row; text-align: left; justify-content: flex-start; }
+      .contact-cards { grid-template-columns: 1fr; }
+      .recruit-table th { width: 130px; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 80px 5%; }
+      .hero h1 { letter-spacing: 0.1em; }
+      .recruit-table th,
+      .recruit-table td { display: block; width: 100%; }
+      .recruit-table th { padding-bottom: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header id="header">
+  <a class="logo" href="#">ARCHI <span>&</span> Co.</a>
+  <nav id="nav">
+    <a href="#news">News</a>
+    <a href="#strength">Strength</a>
+    <a href="#products">Products</a>
+    <a href="#showroom">Showroom</a>
+    <a href="#recruit">Recruit</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="hero-yt-wrap">
+    <!--
+      YouTube動画IDの変更方法：
+      使いたい動画のURLが https://www.youtube.com/watch?v=XXXXXXXXXXX の場合
+      下のsrc内の「dQw4w9WgXcQ」をそのIDに差し替えてください
+    -->
+    <iframe
+      src="https://www.youtube.com/embed/uNMSCqxKaIQ?autoplay=1&mute=1&loop=1&playlist=uNMSCqxKaIQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Architectural Materials Professional</p>
+    <h1>本物を、現場へ。</h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">株式会社 ARCHI & Co.</p>
+  </div>
+</div>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-header reveal">
+    <span class="section-en">News & Topics</span>
+    <h2 class="section-title">最新情報</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="news-list">
+    <div class="news-item reveal reveal-delay-1">
+      <span class="news-date">2026.05.02</span>
+      <p class="news-text">【事業拡大】取扱製品のラインナップを大幅に拡大。最新トレンドの内装材を入荷しました。</p>
+    </div>
+    <div class="news-item reveal reveal-delay-2">
+      <span class="news-date">2026.04.15</span>
+      <p class="news-text">【ネットワーク強化】全国の事業所展開を拡大。より迅速な配送サービスを提供開始しました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 自社の強み -->
+<section id="strength">
+  <div class="section-header reveal">
+    <span class="section-en">Our Strength</span>
+    <h2 class="section-title">自社の強み</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="strength-list">
+    <div class="strength-card reveal reveal-delay-1">
+      <div class="strength-label">
+        <i class="fas fa-truck-fast"></i>
+        <h3>圧倒的な<br>配送スピード</h3>
+      </div>
+      <div class="strength-body">
+        <p>三好市を拠点とした戦略的な物流ネットワークを構築。必要な資材を必要な現場へ、業界トップクラスの短納期でお届けし、現場の円滑な進行を支援します。</p>
+      </div>
+    </div>
+    <div class="strength-card reveal reveal-delay-2">
+      <div class="strength-label">
+        <i class="fas fa-award"></i>
+        <h3>国内屈指の<br>販売実績</h3>
+      </div>
+      <div class="strength-body">
+        <p>主要内装メーカーの特定代理店として、長年にわたりトップクラスの販売実績を維持。確かな信頼関係に基づいた安定供給と、競争力のある価格提案が可能です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 取扱製品 -->
+<section id="products">
+  <div class="section-header reveal">
+    <span class="section-en">Products</span>
+    <h2 class="section-title">取扱製品</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="product-grid">
+    <article class="product-card reveal reveal-delay-1">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&q=80&w=800" alt="クロス" class="product-img">
+      </div>
+      <div class="product-info">
+        <h3>クロス（壁紙）</h3>
+        <p>スタンダードからハイエンドまで。最新の防汚・消臭機能付きクロスも幅広く取り揃えています。</p>
+      </div>
+    </article>
+    <article class="product-card reveal reveal-delay-2">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&q=80&w=800" alt="床材" class="product-img">
+      </div>
+      <div class="product-info">
+        <h3>クッションフロア（床材）</h3>
+        <p>リアルな木目やタイル柄など、空間の価値を高める高品質な床材。耐久テストをクリアした一級品のみを厳選。</p>
+      </div>
+    </article>
+    <article class="product-card reveal reveal-delay-3">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&q=80&w=800" alt="工具" class="product-img">
+      </div>
+      <div class="product-info">
+        <h3>その他（工具・副資材）</h3>
+        <p>職人のこだわりに応える専門工具。接着剤やパテなどの副資材も、現場のニーズに合わせて最適解をご提供。</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ショールーム -->
+<section id="showroom">
+  <div class="section-header reveal">
+    <span class="section-en">Showroom</span>
+    <h2 class="section-title">ショールーム</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="showroom-grid">
+    <div class="showroom-card reveal reveal-delay-1">
+      <h3>東京ショールーム</h3>
+      <p>〒160-〇〇〇〇<br>東京都新宿区西新宿 〇〇ビル内</p>
+    </div>
+    <div class="showroom-card reveal reveal-delay-2">
+      <h3>名古屋ショールーム</h3>
+      <p>〒460-〇〇〇〇<br>愛知県名古屋市中区丸の内 〇丁目内</p>
+    </div>
+    <div class="showroom-card reveal reveal-delay-3">
+      <h3>大阪ショールーム</h3>
+      <p>〒530-〇〇〇〇<br>大阪府大阪市北区梅田 〇丁目内</p>
+    </div>
+    <div class="showroom-card reveal reveal-delay-3">
+      <h3>福岡ショールーム</h3>
+      <p>〒810-〇〇〇〇<br>福岡県福岡市中央区天神 〇丁目内</p>
+    </div>
+  </div>
+</section>
+
+<!-- 採用情報 -->
+<section id="recruit">
+  <div class="section-header reveal">
+    <span class="section-en">Recruit</span>
+    <h2 class="section-title">採用情報</h2>
+    <div class="section-rule"></div>
+  </div>
+  <table class="recruit-table reveal">
+    <tr><th>仕事内容</th><td>商品の仕入れから施工業者、小売店への販売が主な仕事内容です。トータルインテリアを提案しているため、時には建設中の現場に立ち会い、納まりの確認やアドバイスを行うこともあります。</td></tr>
+    <tr><th>給与</th><td class="highlight">256,300円～（固定残業代30時間分含む）</td></tr>
+    <tr><th>諸手当</th><td>通勤手当、皆勤手当、家族手当、住宅手当、役職手当、資格手当</td></tr>
+    <tr><th>昇給・賞与</th><td>昇給：年1回（4月）／賞与：年2回（6月、12月）</td></tr>
+    <tr><th>休日休暇</th><td>完全週休2日制（土日祝）、夏季休暇、年末年始休暇、慶弔休暇、特別休暇、年次有給休暇（初年度10日、最高20日）※年間休日 約125日</td></tr>
+    <tr><th>福利厚生</th><td>各種社会保険完備、退職金共済制度、財形貯蓄、社員持株会、育児・介護休業制度、優秀社員表彰制度、慶弔見舞金</td></tr>
+    <tr><th>教育制度</th><td>新入社員研修、OJT研修（商品知識・現場実習）、社外セミナー受講支援、資格取得支援制度</td></tr>
+    <tr><th>勤務地</th><td>本社（京都市）、他全国各営業所（愛知、大阪、福岡、広島等）</td></tr>
+    <tr><th>応募資格</th><td>大学卒以上／普通自動車運転免許（AT限定可）</td></tr>
+    <tr><th>提出書類</th><td>履歴書（写真貼付）</td></tr>
+    <tr><th>問い合わせ先</th><td>〒111-〇〇〇〇 愛知県名古屋市〇〇町<br>株式会社 ARCHI & Co. 採用担当宛<br>TEL：012-〇〇〇-〇〇〇〇</td></tr>
+  </table>
+</section>
+
+<!-- お問い合わせ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header reveal">
+      <span class="section-en">Contact</span>
+      <h2 class="section-title">お問い合わせ</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="contact-lead reveal">製品に関するご質問、お見積りのご依頼、採用に関するお問い合わせなど、<br>お電話または下記フォームよりお気軽にご連絡ください。</p>
+    <div class="contact-cards">
+      <div class="contact-card reveal reveal-delay-1">
+        <i class="fas fa-phone-alt"></i>
+        <h3>お電話でのお問い合わせ</h3>
+        <span class="contact-tel">012-〇〇〇-〇〇〇〇</span>
+        <span class="contact-hours">受付時間：平日 9:00 〜 18:00</span>
+      </div>
+      <div class="contact-card reveal reveal-delay-2">
+        <i class="fas fa-envelope"></i>
+        <h3>メールフォーム</h3>
+        <a href="#" class="contact-btn">お問い合わせフォームへ</a>
+      </div>
+    </div>
+    <div class="contact-address reveal">
+      <strong>株式会社 ARCHI & Co. 本社</strong><br>
+      〒600-〇〇〇〇 京都府京都市下京区〇〇通〇〇
+    </div>
+  </div>
+</section>
+
+<!-- フッターナビ -->
+<div class="footer-nav">
+  <span class="footer-logo">ARCHI <span>&</span> Co.</span>
+  <div class="footer-links">
+    <a href="#news">News</a>
+    <a href="#strength">Strength</a>
+    <a href="#products">Products</a>
+    <a href="#showroom">Showroom</a>
+    <a href="#recruit">Recruit</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 ARCHI & Co. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // スクロールでヘッダーに影
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ハンバーガーメニュー
+  function toggleMenu() {
+    document.getElementById('nav').classList.toggle('open');
+  }
+
+  // スクロールアニメ
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
